@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:elevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="325dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewFilm"
+            android:layout_width="272dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/coringa" />
+
+        <LinearLayout
+            android:layout_width="253dp"
+            android:layout_height="295dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTituloFilme"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Titulo do filme"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewAnoLancamento"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Ano de lançamento"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewGenero"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:text="Genero"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewDiretor"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:text="Diretor"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewProtagonista"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Protagonista"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
