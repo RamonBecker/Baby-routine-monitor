@@ -12,17 +12,29 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
+import com.example.monitorRotinaBebe.entites.Rotina;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class FragmentoRegistroEventoBebe extends Fragment {
 
     private Spinner spinner_eventos_bebe;
     private Button buttonRegistrarEvento;
+    private DaoEventoBebe daoEventoBebe;
+    SimpleDateFormat horaFormatada;
+    SimpleDateFormat dataFormatada;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,35 +48,49 @@ public class FragmentoRegistroEventoBebe extends Fragment {
 
         spinner_eventos_bebe = view.findViewById(R.id.spinner_eventos_bebe);
         buttonRegistrarEvento = view.findViewById(R.id.buttonRegistrarEventoBebe);
-        popularSpinner(spinner_eventos_bebe,getContext());
+        popularSpinner(spinner_eventos_bebe, getContext());
         açãoBotaoRegistrarEvento(buttonRegistrarEvento);
+        daoEventoBebe = new DaoEventoBebe((AppCompatActivity) getContext());
 
         return view;
     }
 
-    private void popularSpinner(Spinner spinner, Context context){
+    private void popularSpinner(Spinner spinner, Context context) {
         List<String> eventos_bebe = new ArrayList<>();
         eventos_bebe.add("Acordou");
         eventos_bebe.add("Mamou");
         eventos_bebe.add("Trocou");
         eventos_bebe.add("Dormiu");
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item,eventos_bebe);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, eventos_bebe);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
     }
 
-    private void açãoBotaoRegistrarEvento(Button button){
+    private void açãoBotaoRegistrarEvento(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSelectedItem(v);
+                String evento = getSelectedItem(v);
+
+                horaFormatada = new SimpleDateFormat("HH:mm");
+                dataFormatada = new SimpleDateFormat("y:M:d");
+
+                horaFormatada.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
+
+                Date hora_data_atual = Calendar.getInstance().getTime();
+                String horaAtual = horaFormatada.format(hora_data_atual);
+                String dataAtual = dataFormatada.format(hora_data_atual);
+
+                daoEventoBebe.inserirRotina(new Rotina(evento, dataAtual, horaAtual));
+
+                Toast.makeText(getContext(), "HORA:"+horaAtual, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "DATA:" + dataAtual, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void getSelectedItem(View view){
-        String evento  = (String) spinner_eventos_bebe.getSelectedItem();
-        Toast.makeText(view.getContext(), ""+evento, Toast.LENGTH_SHORT).show();
+    public String getSelectedItem(View view) {
+        return (String) spinner_eventos_bebe.getSelectedItem();
     }
 }
