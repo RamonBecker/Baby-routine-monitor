@@ -21,6 +21,8 @@ public class Rotina implements Parcelable {
     private String data;
     @ColumnInfo(name = "hora")
     private String hora;
+    @ColumnInfo(name = "img_bebe")
+    private int idImagem;
 
     public Rotina(){
     }
@@ -41,6 +43,26 @@ public class Rotina implements Parcelable {
         this.evento = evento;
         this.data = data;
         this.hora = hora;
+    }
+
+    public Rotina(String evento, String data, String hora, int idImagem) {
+
+        if(evento == null || evento.isEmpty()){
+            throw  new IllegalArgumentException("O campo evento não pode ser vazio");
+        }
+
+        else if(data == null || data.isEmpty()){
+            throw  new IllegalArgumentException("A data não pode ser vazia");
+        }
+
+        else if(hora == null || hora.isEmpty()){
+            throw  new IllegalArgumentException("A hora não pode ser vazia");
+        }
+
+        this.evento = evento;
+        this.data = data;
+        this.hora = hora;
+        this.idImagem = idImagem;
     }
 
     public Rotina(long id, String evento, String data, String hora) {
@@ -133,6 +155,14 @@ public class Rotina implements Parcelable {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public int getIdImagem() {
+        return idImagem;
+    }
+
+    public void setIdImagem(int idImagem) {
+        this.idImagem = idImagem;
     }
 
     @Override

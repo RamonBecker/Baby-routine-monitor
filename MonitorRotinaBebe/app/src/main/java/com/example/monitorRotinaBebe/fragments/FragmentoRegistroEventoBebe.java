@@ -101,14 +101,29 @@ public class FragmentoRegistroEventoBebe extends Fragment {
                 Log.i("Lista", ""+retornarRotinas.getRotinas());
 
                 Rotina ultimaRotina =  retornarRotinas.getRotinas().get(retornarRotinas.getRotinas().size()-1);
-
+                
                 if(ultimaRotina.getEvento().equalsIgnoreCase("Dormiu")){
-                    daoEventoBebe.inserirRotina(new Rotina("Acordou",dataAtual,horaAtual));
+                    daoEventoBebe.inserirRotina(new Rotina("Acordou",dataAtual,horaAtual,R.drawable.bebeacordando));
                 }
-                daoEventoBebe.inserirRotina(new Rotina(evento, dataAtual, horaAtual));
+                int idImagem = 0;
+
+                if(evento.equalsIgnoreCase("Acordou")){
+                    idImagem = R.drawable.bebeacordando;
+                }
+                else if(evento.equalsIgnoreCase("Dormindo")){
+                    idImagem = R.drawable.bebedormindo;
+                }
+                else if(evento.equalsIgnoreCase("Trocou")){
+                    idImagem = R.drawable.bebetrocou;
+                }
+                else if(evento.equalsIgnoreCase("Mamou")){
+                    idImagem = R.drawable.bebemamou;
+                }
+
+                daoEventoBebe.inserirRotina(new Rotina(evento, dataAtual, horaAtual, idImagem));
 
                 Toast.makeText(getContext(), "Evento cadastro com sucesso !", Toast.LENGTH_SHORT).show();
-                
+
             }
         });
     }

@@ -29,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile_vertical" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -47,7 +47,7 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/res/drawable" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RecentsManager">
@@ -56,6 +56,7 @@
       <recent name="com.example.fragmentsfilms.Adapter" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Cliente\Documents\GitHub\MonitorRotinaBebe\MonitorRotinaBebe\app\src\main\res\drawable" />
       <recent name="C:\Users\Cliente\Documents\GitHub\FragmentsFilms\FragmentsFilms\FragmentsFilms\app\src\main\res\drawable" />
     </key>
   </component>
@@ -146,26 +147,34 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591316825498">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591380822440">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591316825498" />
-    <state width="1323" height="124" key="GridCell.Tab.0.bottom" timestamp="1591379866744">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591380822440" />
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1591380161589">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="124" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591379866744" />
-    <state width="1323" height="124" key="GridCell.Tab.0.center" timestamp="1591379866744">
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1591380161589" />
+    <state width="1323" height="124" key="GridCell.Tab.0.bottom" timestamp="1591380909652">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="124" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591379866744" />
-    <state width="1323" height="124" key="GridCell.Tab.0.left" timestamp="1591379866744">
+    <state width="1323" height="124" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591380909652" />
+    <state width="1323" height="124" key="GridCell.Tab.0.center" timestamp="1591380909652">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="124" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591379866744" />
-    <state width="1323" height="124" key="GridCell.Tab.0.right" timestamp="1591379866744">
+    <state width="1323" height="124" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591380909652" />
+    <state width="1323" height="124" key="GridCell.Tab.0.left" timestamp="1591380909652">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="124" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591379866744" />
+    <state width="1323" height="124" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591380909652" />
+    <state width="1323" height="124" key="GridCell.Tab.0.right" timestamp="1591380909652">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="124" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591380909652" />
+    <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1591380702264">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="499" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1591380702264" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1591311007082">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
