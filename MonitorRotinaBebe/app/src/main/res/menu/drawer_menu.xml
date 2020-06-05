@@ -30,6 +30,10 @@
                 android:id="@+id/menuRegistrarEvento"
                 android:icon="@android:drawable/ic_menu_add"
                 android:title="Registrar evento" />
+            <item
+                android:id="@+id/menuMostrarRotinaDoDia"
+                android:icon="@android:drawable/ic_menu_agenda"
+                android:title="Mostrar rotina do dia" />
         </menu>
     </item>
 </menu>

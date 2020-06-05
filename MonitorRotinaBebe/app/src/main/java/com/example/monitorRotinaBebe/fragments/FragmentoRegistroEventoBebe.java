@@ -58,7 +58,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
         buttonRegistrarEvento = view.findViewById(R.id.buttonRegistrarEventoBebe);
         popularSpinner(spinner_eventos_bebe, getContext());
         açãoBotaoRegistrarEvento(buttonRegistrarEvento);
-        bd = AppDataBase.getInstance(getContext());
+
         daoEventoBebe = new DaoEventoBebe((AppCompatActivity) getContext());
 
         return view;
@@ -78,10 +78,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
 
     private void carregarRotinas() {
         retornarRotinas = new RetornarRotinas((AppCompatActivity) getContext());
-
         AppDataBase.databaseWriteExecutor.execute(retornarRotinas);
-
-        Log.i("Dentro do RUN1", "" + rotinaList);
     }
 
 
@@ -115,7 +112,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
 
                 if (evento.equalsIgnoreCase("Acordou")) {
                     idImagem = R.drawable.bebeacordando;
-                } else if (evento.equalsIgnoreCase("Dormindo")) {
+                } else if (evento.equalsIgnoreCase("Dormiu")) {
                     idImagem = R.drawable.bebedormindo;
                 } else if (evento.equalsIgnoreCase("Trocou")) {
                     idImagem = R.drawable.bebetrocou;
