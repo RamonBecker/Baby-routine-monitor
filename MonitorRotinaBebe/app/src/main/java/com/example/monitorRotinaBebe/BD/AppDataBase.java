@@ -11,7 +11,7 @@ import com.example.monitorRotinaBebe.entites.Rotina;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = Rotina.class, version = 1, exportSchema = true)
+@Database(entities = Rotina.class, version = 1, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
     public abstract DaoDataBase daoDataBase();
 

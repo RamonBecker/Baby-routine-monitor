@@ -2,6 +2,7 @@ package com.example.monitorRotinaBebe.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
+import com.example.monitorRotinaBebe.threads.RetornarRotinas;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -33,23 +36,29 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     private Spinner spinner_eventos_bebe;
     private Button buttonRegistrarEvento;
     private DaoEventoBebe daoEventoBebe;
-    SimpleDateFormat horaFormatada;
-    SimpleDateFormat dataFormatada;
+    private SimpleDateFormat horaFormatada;
+    private SimpleDateFormat dataFormatada;
+    public List<Rotina> rotinaList = new ArrayList<>();
+    private AppDataBase bd;
+    private RetornarRotinas retornarRotinas;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        carregarRotinas();
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.registro_evento_bebe, container, false);
-
+        rotinaList = new ArrayList<>();
         spinner_eventos_bebe = view.findViewById(R.id.spinner_eventos_bebe);
         buttonRegistrarEvento = view.findViewById(R.id.buttonRegistrarEventoBebe);
         popularSpinner(spinner_eventos_bebe, getContext());
         açãoBotaoRegistrarEvento(buttonRegistrarEvento);
+
         daoEventoBebe = new DaoEventoBebe((AppCompatActivity) getContext());
 
         return view;
@@ -67,6 +76,13 @@ public class FragmentoRegistroEventoBebe extends Fragment {
         spinner.setAdapter(arrayAdapter);
     }
 
+    private void carregarRotinas() {
+        retornarRotinas = new RetornarRotinas((AppCompatActivity) getContext());
+        AppDataBase.databaseWriteExecutor.execute(retornarRotinas);
+        rotinaList.addAll(retornarRotinas.getRotinas());
+    }
+
+
     private void açãoBotaoRegistrarEvento(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,10 +98,17 @@ public class FragmentoRegistroEventoBebe extends Fragment {
                 String horaAtual = horaFormatada.format(hora_data_atual);
                 String dataAtual = dataFormatada.format(hora_data_atual);
 
+                Log.i("Lista", ""+retornarRotinas.getRotinas());
+
+                Rotina ultimaRotina =  retornarRotinas.getRotinas().get(retornarRotinas.getRotinas().size()-1);
+
+                if(ultimaRotina.getEvento().equalsIgnoreCase("Dormiu")){
+                    daoEventoBebe.inserirRotina(new Rotina("Acordou",dataAtual,horaAtual));
+                }
                 daoEventoBebe.inserirRotina(new Rotina(evento, dataAtual, horaAtual));
 
-                Toast.makeText(getContext(), "HORA:"+horaAtual, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), "DATA:" + dataAtual, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Evento cadastro com sucesso !", Toast.LENGTH_SHORT).show();
+                
             }
         });
     }
