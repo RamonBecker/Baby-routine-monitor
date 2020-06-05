@@ -101,7 +101,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
                 Log.i("Lista", ""+retornarRotinas.getRotinas());
 
                 Rotina ultimaRotina =  retornarRotinas.getRotinas().get(retornarRotinas.getRotinas().size()-1);
-                
+
                 if(ultimaRotina.getEvento().equalsIgnoreCase("Dormiu")){
                     daoEventoBebe.inserirRotina(new Rotina("Acordou",dataAtual,horaAtual,R.drawable.bebeacordando));
                 }
