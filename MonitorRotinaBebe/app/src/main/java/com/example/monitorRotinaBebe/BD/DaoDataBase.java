@@ -17,4 +17,7 @@ public interface DaoDataBase {
 
     @Query("SELECT * FROM rotina")
      public List<Rotina> getAll();
+
+    @Query("SELECT * FROM rotina WHERE data LIKE :data ")
+    public List<Rotina> getAllDate(String data);
 }

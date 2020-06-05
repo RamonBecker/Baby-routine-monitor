@@ -147,30 +147,30 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591383843097">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591391311436">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591383843097" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591391311436" />
     <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1591380161589">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1591380161589" />
-    <state width="1323" height="124" key="GridCell.Tab.0.bottom" timestamp="1591380909652">
+    <state width="1323" height="247" key="GridCell.Tab.0.bottom" timestamp="1591391954451">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="124" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591380909652" />
-    <state width="1323" height="124" key="GridCell.Tab.0.center" timestamp="1591380909652">
+    <state width="1323" height="247" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591391954451" />
+    <state width="1323" height="247" key="GridCell.Tab.0.center" timestamp="1591391954450">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="124" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591380909652" />
-    <state width="1323" height="124" key="GridCell.Tab.0.left" timestamp="1591380909652">
+    <state width="1323" height="247" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591391954450" />
+    <state width="1323" height="247" key="GridCell.Tab.0.left" timestamp="1591391954450">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="124" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591380909652" />
-    <state width="1323" height="124" key="GridCell.Tab.0.right" timestamp="1591380909652">
+    <state width="1323" height="247" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591391954450" />
+    <state width="1323" height="247" key="GridCell.Tab.0.right" timestamp="1591391954450">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="124" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591380909652" />
+    <state width="1323" height="247" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591391954450" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1591380702264">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -195,11 +195,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/monitorRotinaBebe/BD/DaoEventoBebe.java</url>
           <line>16</line>
           <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/monitorRotinaBebe/fragments/FragmentoRegistroEventoBebe.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

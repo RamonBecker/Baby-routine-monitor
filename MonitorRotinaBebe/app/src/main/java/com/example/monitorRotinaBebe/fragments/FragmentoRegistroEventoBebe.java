@@ -58,7 +58,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
         buttonRegistrarEvento = view.findViewById(R.id.buttonRegistrarEventoBebe);
         popularSpinner(spinner_eventos_bebe, getContext());
         açãoBotaoRegistrarEvento(buttonRegistrarEvento);
-
+        bd = AppDataBase.getInstance(getContext());
         daoEventoBebe = new DaoEventoBebe((AppCompatActivity) getContext());
 
         return view;
@@ -78,8 +78,10 @@ public class FragmentoRegistroEventoBebe extends Fragment {
 
     private void carregarRotinas() {
         retornarRotinas = new RetornarRotinas((AppCompatActivity) getContext());
+
         AppDataBase.databaseWriteExecutor.execute(retornarRotinas);
-        rotinaList.addAll(retornarRotinas.getRotinas());
+
+        Log.i("Dentro do RUN1", "" + rotinaList);
     }
 
 
@@ -98,25 +100,26 @@ public class FragmentoRegistroEventoBebe extends Fragment {
                 String horaAtual = horaFormatada.format(hora_data_atual);
                 String dataAtual = dataFormatada.format(hora_data_atual);
 
-                Log.i("Lista", ""+retornarRotinas.getRotinas());
+                Log.i("Lista", "" + retornarRotinas.getRotinas());
+                Rotina ultimaRotina = null;
+                if (!retornarRotinas.getRotinas().isEmpty()) {
+                    ultimaRotina = retornarRotinas.getRotinas().get(retornarRotinas.getRotinas().size() - 1);
+                }
 
-                Rotina ultimaRotina =  retornarRotinas.getRotinas().get(retornarRotinas.getRotinas().size()-1);
-
-                if(ultimaRotina.getEvento().equalsIgnoreCase("Dormiu")){
-                    daoEventoBebe.inserirRotina(new Rotina("Acordou",dataAtual,horaAtual,R.drawable.bebeacordando));
+                if (ultimaRotina != null) {
+                    if (ultimaRotina.getEvento().equalsIgnoreCase("Dormiu")) {
+                        daoEventoBebe.inserirRotina(new Rotina("Acordou", dataAtual, horaAtual, R.drawable.bebeacordando));
+                    }
                 }
                 int idImagem = 0;
 
-                if(evento.equalsIgnoreCase("Acordou")){
+                if (evento.equalsIgnoreCase("Acordou")) {
                     idImagem = R.drawable.bebeacordando;
-                }
-                else if(evento.equalsIgnoreCase("Dormindo")){
+                } else if (evento.equalsIgnoreCase("Dormindo")) {
                     idImagem = R.drawable.bebedormindo;
-                }
-                else if(evento.equalsIgnoreCase("Trocou")){
+                } else if (evento.equalsIgnoreCase("Trocou")) {
                     idImagem = R.drawable.bebetrocou;
-                }
-                else if(evento.equalsIgnoreCase("Mamou")){
+                } else if (evento.equalsIgnoreCase("Mamou")) {
                     idImagem = R.drawable.bebemamou;
                 }
 

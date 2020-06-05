@@ -11,12 +11,16 @@ import com.example.monitorRotinaBebe.fragments.FragmentoRegistroEventoBebe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RetornarRotinas implements  Runnable {
+public class RetornarRotinas implements Runnable  {
     public  List<Rotina> rotinas = new ArrayList<>();
     private AppDataBase bd;
 
     public RetornarRotinas(AppCompatActivity activity) {
         this.bd = AppDataBase.getInstance(activity);;
+    }
+
+    public  List<Rotina> getRotinas() {
+        return rotinas;
     }
 
     @Override
@@ -29,9 +33,5 @@ public class RetornarRotinas implements  Runnable {
             }
 
         });
-    }
-
-    public  List<Rotina> getRotinas() {
-        return rotinas;
     }
 }
