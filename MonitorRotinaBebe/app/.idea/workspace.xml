@@ -196,6 +196,11 @@
           <line>16</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/monitorRotinaBebe/fragments/FragmentoRegistroEventoBebe.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
