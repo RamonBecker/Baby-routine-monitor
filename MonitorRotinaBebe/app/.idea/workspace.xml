@@ -29,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile_vertical" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -147,10 +147,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591380822440">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591383843097">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591380822440" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591383843097" />
     <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1591380161589">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

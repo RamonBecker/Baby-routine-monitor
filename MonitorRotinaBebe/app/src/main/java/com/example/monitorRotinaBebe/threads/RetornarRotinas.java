@@ -25,9 +25,7 @@ public class RetornarRotinas implements  Runnable {
             @Override
             public void run() {
                 rotinas= bd.daoDataBase().getAll();
-
                 Log.i("Dentro do RUN1",""+rotinas);
-               // FragmentoRegistroEventoBebe.rotinaList.addAll(rotinas);
             }
 
         });
