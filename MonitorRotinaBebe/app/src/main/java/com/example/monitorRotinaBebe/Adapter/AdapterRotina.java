@@ -1,18 +1,23 @@
 package com.example.monitorRotinaBebe.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
+import com.example.monitorRotinaBebe.fragments.FragmentoEditarRotinaBebe;
 import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 
 import org.w3c.dom.Text;
@@ -27,6 +32,8 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     private AppDataBase db;
     private RetornarRotinaDia retornarRotinaDia;
     private SimpleDateFormat dataFormatada;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
 
     public AdapterRotina(AppCompatActivity activity) {
@@ -35,7 +42,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
         carregarDadosRotinaDia();
     }
 
-    private void carregarDadosRotinaDia(){
+    private void carregarDadosRotinaDia() {
 
         retornarRotinaDia = new RetornarRotinaDia(activity);
         dataFormatada = new SimpleDateFormat("y:M:d");
@@ -48,19 +55,29 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_lista_rotina_bebe, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_lista_rotina_bebe, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-         Rotina rotina  = retornarRotinaDia.getRotinas().get(position);
-         holder.hora.setText(rotina.getHora());
-         holder.data.setText(rotina.getData());
-         holder.evento.setText(rotina.getEvento());
-         holder.imageView.setImageResource(rotina.getIdImagem()) ;
+        final Rotina rotina = retornarRotinaDia.getRotinas().get(position);
+        holder.hora.setText(rotina.getHora());
+        holder.data.setText(rotina.getData());
+        holder.evento.setText(rotina.getEvento());
+        holder.imageView.setImageResource(rotina.getIdImagem());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Log.i("Rotina",""+rotina);
+                fragmentManager = activity.getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragment, new FragmentoEditarRotinaBebe(rotina));
+                fragmentTransaction.commit();
+            }
+        });
 
     }
 
@@ -70,7 +87,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView hora;
         private TextView data;
         private TextView evento;

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.monitorRotinaBebe.R;
+import com.example.monitorRotinaBebe.entites.Rotina;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Calendar;
@@ -26,7 +27,17 @@ import java.util.Calendar;
 public class FragmentoEditarRotinaBebe extends Fragment {
     private Button button;
     private  TextView selecionarhorario;
+    private EditText horario_Atual_Rotina;
+    private EditText evento;
     private EditText horario;
+    private Rotina rotina;
+
+    public FragmentoEditarRotinaBebe(){
+    }
+
+    public  FragmentoEditarRotinaBebe(Rotina rotina){
+        this.rotina = rotina;
+    }
 
     @Nullable
     @Override
@@ -37,6 +48,11 @@ public class FragmentoEditarRotinaBebe extends Fragment {
         button = view.findViewById(R.id.botaoEditarRotina);
         selecionarhorario = view.findViewById(R.id.clicarEditarHorario);
         horario = view.findViewById(R.id.editarHoraEvento);
+        horario_Atual_Rotina = view.findViewById(R.id.editarHorario);
+        evento = view.findViewById(R.id.editarEvento);
+
+        horario_Atual_Rotina.setText(rotina.getHora());
+        evento.setText(rotina.getEvento());
 
         Calendar calendar = Calendar.getInstance();
         final int hora = calendar.get(Calendar.HOUR_OF_DAY);
