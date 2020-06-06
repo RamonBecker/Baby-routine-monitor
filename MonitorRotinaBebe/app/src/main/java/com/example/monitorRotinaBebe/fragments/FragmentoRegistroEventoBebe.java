@@ -20,6 +20,7 @@ import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
+import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 import com.example.monitorRotinaBebe.threads.RetornarRotinas;
 
 import java.text.DateFormat;
@@ -37,10 +38,11 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     private Button buttonRegistrarEvento;
     private DaoEventoBebe daoEventoBebe;
     private SimpleDateFormat horaFormatada;
-    private SimpleDateFormat dataFormatada;
     public List<Rotina> rotinaList = new ArrayList<>();
     private AppDataBase bd;
     private RetornarRotinas retornarRotinas;
+    private RetornarRotinaDia retornarRotinaDia;
+    private Date hora_data_atual;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,10 +79,19 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     }
 
     private void carregarRotinas() {
-        retornarRotinas = new RetornarRotinas((AppCompatActivity) getContext());
-        AppDataBase.databaseWriteExecutor.execute(retornarRotinas);
+        //retornarRotinas = new RetornarRotinas((AppCompatActivity) getContext());
+        retornarRotinaDia = new RetornarRotinaDia((AppCompatActivity) getActivity());
+
+        retornarRotinaDia.setData(retornarDataFormatada());
+        AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
     }
 
+    private String retornarDataFormatada(){
+        Date hora_data_atual = Calendar.getInstance().getTime();
+        SimpleDateFormat dataFormatada = new SimpleDateFormat("y:M:d");
+        String dataAtual = dataFormatada.format(hora_data_atual);
+        return  dataAtual;
+    }
 
     private void açãoBotaoRegistrarEvento(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
@@ -88,19 +99,16 @@ public class FragmentoRegistroEventoBebe extends Fragment {
             public void onClick(View v) {
                 String evento = getSelectedItem(v);
 
-                horaFormatada = new SimpleDateFormat("HH:mm");
-                dataFormatada = new SimpleDateFormat("y:M:d");
-
+                SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
                 horaFormatada.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
-
                 Date hora_data_atual = Calendar.getInstance().getTime();
                 String horaAtual = horaFormatada.format(hora_data_atual);
-                String dataAtual = dataFormatada.format(hora_data_atual);
+                String dataAtual = retornarDataFormatada();
 
-                Log.i("Lista", "" + retornarRotinas.getRotinas());
+
                 Rotina ultimaRotina = null;
-                if (!retornarRotinas.getRotinas().isEmpty()) {
-                    ultimaRotina = retornarRotinas.getRotinas().get(retornarRotinas.getRotinas().size() - 1);
+                if (!retornarRotinaDia.getRotinas().isEmpty()) {
+                    ultimaRotina = retornarRotinaDia.getRotinas().get(retornarRotinaDia.getRotinas().size() - 1);
                 }
 
                 if (ultimaRotina != null) {

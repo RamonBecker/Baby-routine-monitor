@@ -151,34 +151,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591391311436" />
-    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1591380161589">
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1591396082586">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1591380161589" />
-    <state width="1323" height="185" key="GridCell.Tab.0.bottom" timestamp="1591394727413">
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1591396082586" />
+    <state width="1323" height="185" key="GridCell.Tab.0.bottom" timestamp="1591404299932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591394727413" />
-    <state width="1323" height="185" key="GridCell.Tab.0.center" timestamp="1591394727412">
+    <state width="1323" height="185" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591404299932" />
+    <state width="1323" height="185" key="GridCell.Tab.0.center" timestamp="1591404299932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591394727412" />
-    <state width="1323" height="185" key="GridCell.Tab.0.left" timestamp="1591394727412">
+    <state width="1323" height="185" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591404299932" />
+    <state width="1323" height="185" key="GridCell.Tab.0.left" timestamp="1591404299932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591394727412" />
-    <state width="1323" height="185" key="GridCell.Tab.0.right" timestamp="1591394727412">
+    <state width="1323" height="185" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591404299932" />
+    <state width="1323" height="185" key="GridCell.Tab.0.right" timestamp="1591404299932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591394727412" />
+    <state width="1323" height="185" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591404299932" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1591380702264">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="499" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1591380702264" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1591311007082">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1591396448484">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591311007082" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1591396448484" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1591403965810">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591403965810" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

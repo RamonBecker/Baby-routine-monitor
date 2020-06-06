@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.controller.ControllerAtor;
 import com.example.monitorRotinaBebe.controller.ControllerFilme;
+import com.example.monitorRotinaBebe.fragments.FragmentoEditarRotinaBebe;
 import com.example.monitorRotinaBebe.fragments.FragmentoRecyclerRotinaDoDia;
 import com.example.monitorRotinaBebe.fragments.FragmentoRegistroEventoBebe;
 import com.example.monitorRotinaBebe.fragments.RecyclerFragmentAtor;
@@ -95,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(menuItem == R.id.menuMostrarRotinaDoDia){
             initializeFragment(new FragmentoRecyclerRotinaDoDia());
+        }
+
+        if(menuItem == R.id.menuEditarRotina){
+            initializeFragment(new FragmentoEditarRotinaBebe());
         }
 
         return true;
