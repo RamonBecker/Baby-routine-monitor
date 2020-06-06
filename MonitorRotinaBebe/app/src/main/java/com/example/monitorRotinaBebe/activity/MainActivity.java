@@ -98,10 +98,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             initializeFragment(new FragmentoRecyclerRotinaDoDia());
         }
 
-        if(menuItem == R.id.menuEditarRotina){
-            initializeFragment(new FragmentoEditarRotinaBebe());
-        }
-
         return true;
     }
 

@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.media.session.MediaController;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
+import com.example.monitorRotinaBebe.threads.AtualizarRotina;
+import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class FragmentoEditarRotinaBebe extends Fragment {
     private Button button;
@@ -31,6 +38,8 @@ public class FragmentoEditarRotinaBebe extends Fragment {
     private EditText evento;
     private EditText horario;
     private Rotina rotina;
+    private AtualizarRotina atualizarRotina;
+    private RetornarRotinaDia retornarRotinaDia;
 
     public FragmentoEditarRotinaBebe(){
     }
@@ -90,6 +99,8 @@ public class FragmentoEditarRotinaBebe extends Fragment {
     }
 
     private void openDialog(){
+
+
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Atenção");
         alert.setMessage("Esta ação poderá gerar inconsistência nos dados futuramente !\n" +
@@ -97,18 +108,23 @@ public class FragmentoEditarRotinaBebe extends Fragment {
         alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), "Sim", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Rotina atualizada", Toast.LENGTH_SHORT).show();
+                rotina.setHora(String.valueOf(horario.getText()));
+                atualizarRotina = new AtualizarRotina(rotina, (AppCompatActivity) getActivity());
+                AppDataBase.databaseWriteExecutor.execute(atualizarRotina);
+
             }
         });
 
         alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), "Não", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Atualização de rotina cancelada", Toast.LENGTH_SHORT).show();
             }
         });
 
         AlertDialog alertDialog = alert.create();
         alertDialog.show();
     }
+
 }

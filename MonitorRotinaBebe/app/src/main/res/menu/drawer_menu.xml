@@ -34,10 +34,6 @@
                 android:id="@+id/menuMostrarRotinaDoDia"
                 android:icon="@android:drawable/ic_menu_agenda"
                 android:title="Mostrar rotina do dia" />
-            <item
-                android:id="@+id/menuEditarRotina"
-                android:icon="@drawable/editarotina"
-                android:title="Editar rotina" />
         </menu>
     </item>
 </menu>
