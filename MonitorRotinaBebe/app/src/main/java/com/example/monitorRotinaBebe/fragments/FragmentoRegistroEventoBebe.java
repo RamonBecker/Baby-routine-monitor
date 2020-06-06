@@ -43,6 +43,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     private RetornarRotinaDia retornarRotinaDia;
     private Date hora_data_atual;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

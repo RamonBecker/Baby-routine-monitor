@@ -9,8 +9,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.monitorRotinaBebe.Adapter.AdapterRotina;
+import com.example.monitorRotinaBebe.Adapter.touch.TouchRotina;
 import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
@@ -37,6 +39,10 @@ public class FragmentoRecyclerRotinaDoDia extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         adapterRotina = new AdapterRotina((AppCompatActivity) getActivity());
         recyclerView.setAdapter(adapterRotina);
+
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new TouchRotina(adapterRotina));
+        touchHelper.attachToRecyclerView(recyclerView);
+
         return view;
     }
 }
