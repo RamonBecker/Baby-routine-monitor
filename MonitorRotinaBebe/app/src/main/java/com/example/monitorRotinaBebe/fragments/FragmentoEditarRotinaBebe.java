@@ -2,9 +2,7 @@ package com.example.monitorRotinaBebe.fragments;
 
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.media.session.MediaController;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +11,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
 import com.example.monitorRotinaBebe.threads.AtualizarRotina;
 import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class FragmentoEditarRotinaBebe extends Fragment {
+
     private Button button;
     private  TextView selecionarhorario;
     private EditText horario_Atual_Rotina;
@@ -39,13 +36,15 @@ public class FragmentoEditarRotinaBebe extends Fragment {
     private EditText horario;
     private Rotina rotina;
     private AtualizarRotina atualizarRotina;
+    private AppCompatActivity activity;
     private RetornarRotinaDia retornarRotinaDia;
 
     public FragmentoEditarRotinaBebe(){
     }
 
-    public  FragmentoEditarRotinaBebe(Rotina rotina){
+    public  FragmentoEditarRotinaBebe(Rotina rotina, AppCompatActivity activity){
         this.rotina = rotina;
+        this.activity = activity;
     }
 
     @Nullable
@@ -69,6 +68,7 @@ public class FragmentoEditarRotinaBebe extends Fragment {
 
         acaoSelecionarHorario(selecionarhorario, horario, hora, minuto);
         botaoconfirmarAcao(button);
+        retornarRotinaDia = new RetornarRotinaDia(activity);
         return view;
     }
 
@@ -100,7 +100,6 @@ public class FragmentoEditarRotinaBebe extends Fragment {
 
     private void openDialog(){
 
-
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Atenção");
         alert.setMessage("Esta ação poderá gerar inconsistência nos dados futuramente !\n" +
@@ -112,19 +111,29 @@ public class FragmentoEditarRotinaBebe extends Fragment {
                 rotina.setHora(String.valueOf(horario.getText()));
                 atualizarRotina = new AtualizarRotina(rotina, (AppCompatActivity) getActivity());
                 AppDataBase.databaseWriteExecutor.execute(atualizarRotina);
+               // AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
 
+                initializeFragment();
             }
         });
 
         alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                horario.setText("");
                 Toast.makeText(getContext(), "Atualização de rotina cancelada", Toast.LENGTH_SHORT).show();
+                initializeFragment();
             }
         });
 
         AlertDialog alertDialog = alert.create();
         alertDialog.show();
+    }
+    private void initializeFragment(){
+          FragmentManager fragmentManager = activity.getSupportFragmentManager();
+          FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+          fragmentTransaction.replace(R.id.container_fragment, new FragmentoRecyclerRotinaDoDia());
+          fragmentTransaction.commit();
     }
 
 }

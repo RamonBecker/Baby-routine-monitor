@@ -1,27 +1,20 @@
 package com.example.monitorRotinaBebe.Adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
 import com.example.monitorRotinaBebe.fragments.FragmentoEditarRotinaBebe;
 import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
-
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -74,7 +67,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
                 //Log.i("Rotina",""+rotina);
                 fragmentManager = activity.getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container_fragment, new FragmentoEditarRotinaBebe(rotina));
+                fragmentTransaction.replace(R.id.container_fragment, new FragmentoEditarRotinaBebe(rotina, activity));
                 fragmentTransaction.commit();
             }
         });

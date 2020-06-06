@@ -1,13 +1,11 @@
 package com.example.monitorRotinaBebe.BD;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
 import com.example.monitorRotinaBebe.entites.Rotina;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -24,4 +22,10 @@ public interface DaoDataBase {
 
     @Update
     public void updateRotina(Rotina rotina);
+
+    @Query("DELETE FROM rotina")
+    public void deleteAll();
+
+    @Delete
+    public void deletarRotina(Rotina rotina);
 }

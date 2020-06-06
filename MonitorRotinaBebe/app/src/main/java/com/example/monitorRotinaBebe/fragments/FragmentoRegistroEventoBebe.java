@@ -78,7 +78,6 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     }
 
     private void carregarRotinas() {
-        //retornarRotinas = new RetornarRotinas((AppCompatActivity) getContext());
         retornarRotinaDia = new RetornarRotinaDia((AppCompatActivity) getActivity());
 
         retornarRotinaDia.setData(retornarDataFormatada());

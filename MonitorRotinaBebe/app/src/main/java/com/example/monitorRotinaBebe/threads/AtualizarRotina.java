@@ -1,7 +1,6 @@
 package com.example.monitorRotinaBebe.threads;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.entites.Rotina;
 

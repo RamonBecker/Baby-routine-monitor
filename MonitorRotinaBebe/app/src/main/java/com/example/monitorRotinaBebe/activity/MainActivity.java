@@ -12,11 +12,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-
+import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.controller.ControllerAtor;
 import com.example.monitorRotinaBebe.controller.ControllerFilme;
-import com.example.monitorRotinaBebe.fragments.FragmentoEditarRotinaBebe;
 import com.example.monitorRotinaBebe.fragments.FragmentoRecyclerRotinaDoDia;
 import com.example.monitorRotinaBebe.fragments.FragmentoRegistroEventoBebe;
 import com.example.monitorRotinaBebe.fragments.RecyclerFragmentAtor;
@@ -24,9 +23,10 @@ import com.example.monitorRotinaBebe.fragments.RecyclerFragmentDiretor;
 import com.example.monitorRotinaBebe.fragments.RecyclerFragmentFilme;
 import com.example.monitorRotinaBebe.fragments.RegisterPerson;
 import com.example.monitorRotinaBebe.fragments.RegisterFilm;
+import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar toolbar;
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private RegisterPerson registerPerson;
+    private RetornarRotinaDia retornarRotinaDia;
 
 
     @Override
@@ -41,13 +42,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        retornarRotinaDia = new RetornarRotinaDia(this);
+        AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigationview);
-        navigationView.setNavigationItemSelectedListener(this) ;
+        navigationView.setNavigationItemSelectedListener(this);
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar, R.string.open, R.string.close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
@@ -55,53 +59,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         ControllerFilme controllerFilme = ControllerFilme.getInstance();
         ControllerAtor controllerAtor = ControllerAtor.getInstance();
-        Log.i("log", String.valueOf(controllerAtor.getListAtor()==null));
+        Log.i("log", String.valueOf(controllerAtor.getListAtor() == null));
 
         setTitle("Monitor de rotina de bebe");
+
+        initializeFragment(new FragmentoRecyclerRotinaDoDia(this));
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
 
-
         int menuItem = item.getItemId();
 
-        if(menuItem == R.id.menuAtores){
+        if (menuItem == R.id.menuAtores) {
             initializeFragment(new RecyclerFragmentAtor(this));
         }
-        if(menuItem == R.id.menuDiretores){
+        if (menuItem == R.id.menuDiretores) {
             initializeFragment(new RecyclerFragmentDiretor(this));
         }
-        if(menuItem == R.id.menuFilmes){
+        if (menuItem == R.id.menuFilmes) {
             initializeFragment(new RecyclerFragmentFilme(this));
         }
-        if(menuItem == R.id.menuCadastrarAtor){
+        if (menuItem == R.id.menuCadastrarAtor) {
             registerPerson.typeRegister = "Cadastrar Ator";
             initializeFragment(new RegisterPerson(this));
         }
 
-        if(menuItem == R.id.menuItemCadastrarDiretor){
+        if (menuItem == R.id.menuItemCadastrarDiretor) {
             registerPerson.typeRegister = "Cadastrar Diretor";
             initializeFragment(new RegisterPerson(this));
         }
 
-        if(menuItem == R.id.menuCadastrarFilme){
+        if (menuItem == R.id.menuCadastrarFilme) {
             initializeFragment(new RegisterFilm(this));
         }
 
-        if(menuItem == R.id.menuRegistrarEvento){
+        if (menuItem == R.id.menuRegistrarEvento) {
             initializeFragment(new FragmentoRegistroEventoBebe());
         }
 
-        if(menuItem == R.id.menuMostrarRotinaDoDia){
-            initializeFragment(new FragmentoRecyclerRotinaDoDia());
+        if (menuItem == R.id.menuMostrarRotinaDoDia) {
+            initializeFragment(new FragmentoRecyclerRotinaDoDia(this));
         }
 
         return true;
     }
 
-    private void initializeFragment(Fragment fragment){
+    private void initializeFragment(Fragment fragment) {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_fragment, fragment);

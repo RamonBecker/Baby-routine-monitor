@@ -11,13 +11,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.monitorRotinaBebe.Adapter.AdapterRotina;
+import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.R;
+import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 
 public class FragmentoRecyclerRotinaDoDia extends Fragment {
 
 
     private RecyclerView recyclerView;
     private AdapterRotina adapterRotina;
+    private RetornarRotinaDia retornarRotinaDia;
+
+    public FragmentoRecyclerRotinaDoDia(){
+    }
+    public FragmentoRecyclerRotinaDoDia(AppCompatActivity activity){
+        retornarRotinaDia = new RetornarRotinaDia(activity);
+        AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
+    }
 
     @Nullable
     @Override

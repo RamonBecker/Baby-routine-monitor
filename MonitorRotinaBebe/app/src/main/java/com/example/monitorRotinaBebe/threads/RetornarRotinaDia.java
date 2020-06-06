@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RetornarRotinaDia implements  Runnable {
-    public List<Rotina> rotinas = new ArrayList<>();
+    public static List<Rotina> rotinas = new ArrayList<>();
     private String data;
     private AppDataBase bd;
 
@@ -30,7 +30,7 @@ public class RetornarRotinaDia implements  Runnable {
         });
     }
 
-    public List<Rotina> getRotinas() {
+    public static List<Rotina> getRotinas() {
         return rotinas;
     }
 
