@@ -1,6 +1,7 @@
 package com.example.monitorRotinaBebe.fragments;
 
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.media.session.MediaController;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.monitorRotinaBebe.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Calendar;
 
@@ -39,6 +43,7 @@ public class FragmentoEditarRotinaBebe extends Fragment {
         final int minuto = calendar.get(Calendar.MINUTE);
 
         acaoSelecionarHorario(selecionarhorario, horario, hora, minuto);
+        botaoconfirmarAcao(button);
         return view;
     }
 
@@ -57,5 +62,37 @@ public class FragmentoEditarRotinaBebe extends Fragment {
                 timePickerDialog.show();
             }
         });
+    }
+
+    private void botaoconfirmarAcao(Button button){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+    }
+
+    private void openDialog(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setTitle("Atenção");
+        alert.setMessage("Esta ação poderá gerar inconsistência nos dados futuramente !\n" +
+                "Deseja realizar esta operação ?");
+        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getContext(), "Sim", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getContext(), "Não", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AlertDialog alertDialog = alert.create();
+        alertDialog.show();
     }
 }
