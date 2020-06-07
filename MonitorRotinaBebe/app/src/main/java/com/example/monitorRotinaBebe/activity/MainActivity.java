@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.monitorRotinaBebe.Adapter.AdapterRotina;
 import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.controller.ControllerAtor;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentTransaction fragmentTransaction;
     private RegisterPerson registerPerson;
     private RetornarRotinaDia retornarRotinaDia;
+    private AdapterRotina adapterRotina;
 
 
     @Override
@@ -67,24 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initializeFragment(new FragmentoRecyclerRotinaDoDia(this));
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int menuItem = item.getItemId();
-
-        if(menuItem == R.id.menuDeletar){
-            FragmentoRecyclerRotinaDoDia.REMOVER = "Remover";
-            Log.i("Remover main activy", "Remover todas as coisas");
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
 
@@ -137,5 +122,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public FragmentTransaction getFragmentTransaction() {
         return fragmentTransaction;
+    }
+
+
+    public  void setAdapterRotina(AdapterRotina adapterRotina) {
+        this.adapterRotina = adapterRotina;
     }
 }

@@ -48,7 +48,7 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../RecyclerViewCardView" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RecentsManager">
@@ -148,10 +148,14 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591487763188">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1591544857015">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591487763188" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591544857015" />
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591548746069">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1591548746069" />
     <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1591487148253">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -160,22 +164,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1591483980101" />
-    <state width="1323" height="144" key="GridCell.Tab.0.bottom" timestamp="1591488566616">
+    <state width="1323" height="144" key="GridCell.Tab.0.bottom" timestamp="1591548753091">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="144" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591488566616" />
-    <state width="1323" height="144" key="GridCell.Tab.0.center" timestamp="1591488566616">
+    <state width="1323" height="144" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591548753091" />
+    <state width="1323" height="144" key="GridCell.Tab.0.center" timestamp="1591548753091">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="144" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591488566616" />
-    <state width="1323" height="144" key="GridCell.Tab.0.left" timestamp="1591488566616">
+    <state width="1323" height="144" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591548753091" />
+    <state width="1323" height="144" key="GridCell.Tab.0.left" timestamp="1591548753091">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="144" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591488566616" />
-    <state width="1323" height="144" key="GridCell.Tab.0.right" timestamp="1591488566616">
+    <state width="1323" height="144" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591548753091" />
+    <state width="1323" height="144" key="GridCell.Tab.0.right" timestamp="1591548753091">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="144" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591488566616" />
+    <state width="1323" height="144" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591548753091" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1591380702264">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -1,11 +1,16 @@
 package com.example.monitorRotinaBebe.Adapter;
 
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -61,7 +66,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         final Rotina rotina = retornarRotinaDia.getRotinas().get(position);
         holder.hora.setText(rotina.getHora());
@@ -80,11 +85,44 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
             }
         });
 
+
+        holder.botaoExcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return retornarRotinaDia.getRotinas().size();
+    }
+
+
+    private void openDialog(final int posicao){
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle("Atenção");
+        alert.setMessage("Esta ação poderá gerar inconsistência nos dados futuramente !\n" +
+                "Deseja realizar esta operação ?");
+        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(activity, "Rotina excluída", Toast.LENGTH_SHORT).show();
+                remover(posicao);
+            }
+        });
+
+        alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(activity, "Ação cancelada", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AlertDialog alertDialog = alert.create();
+        alertDialog.show();
     }
 
 
@@ -115,22 +153,12 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
         snackbar.show();
     }
 
-    public void removerTodas_as_Rotinas(){
-        deletarTodasRotinas = new DeletarTodasRotinas(activity);
-        AppDataBase.databaseWriteExecutor.execute(deletarRotina);
-
-        while(!retornarRotinaDia.getRotinas().isEmpty()){
-                retornarRotinaDia.getRotinas().remove(0);
-                notifyItemRemoved(0);
-                notifyItemRangeRemoved(0,this.getItemCount());
-        }
-    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView hora;
         private TextView data;
         private TextView evento;
         private ImageView imageView;
+        private Button botaoExcluir;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -138,6 +166,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
             data = itemView.findViewById(R.id.textViewDataRotina);
             evento = itemView.findViewById(R.id.textViewEventoRotina);
             imageView = itemView.findViewById(R.id.imageViewRotinaBebe);
+            botaoExcluir = itemView.findViewById(R.id.buttonExcluirRotina);
         }
     }
 }
