@@ -5,22 +5,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
 import com.example.monitorRotinaBebe.fragments.FragmentoEditarRotinaBebe;
 import com.example.monitorRotinaBebe.threads.DeletarRotina;
+import com.example.monitorRotinaBebe.threads.DeletarTodasRotinas;
 import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,7 +35,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     private Rotina rotinaRemovidaRecentemente;
     private DeletarRotina deletarRotina;
     private DaoEventoBebe daoEventoBebe;
-
+    private DeletarTodasRotinas deletarTodasRotinas;
 
     public AdapterRotina(AppCompatActivity activity) {
         this.activity = activity;
@@ -115,6 +113,17 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
             }
         });
         snackbar.show();
+    }
+
+    public void removerTodas_as_Rotinas(){
+        deletarTodasRotinas = new DeletarTodasRotinas(activity);
+        AppDataBase.databaseWriteExecutor.execute(deletarRotina);
+
+        while(!retornarRotinaDia.getRotinas().isEmpty()){
+                retornarRotinaDia.getRotinas().remove(0);
+                notifyItemRemoved(0);
+                notifyItemRangeRemoved(0,this.getItemCount());
+        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
