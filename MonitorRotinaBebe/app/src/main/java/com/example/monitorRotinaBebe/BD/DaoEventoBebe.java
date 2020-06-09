@@ -12,6 +12,9 @@ import java.util.List;
 
 public class DaoEventoBebe{
     private AppDataBase bd;
+    private String data;
+    private Rotina rotina;
+    private static List<Rotina> rotinas = new ArrayList<>();
 
     public DaoEventoBebe(AppCompatActivity activity) {
         bd = AppDataBase.getInstance(activity);
@@ -25,6 +28,27 @@ public class DaoEventoBebe{
             }
         });
     }
+
+    public void getRotinaDoDia(){
+
+        AppDataBase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                rotinas = bd.daoDataBase().getAllDate(data);
+                Log.i("Rotina dia",""+rotinas);
+            }
+        });
+    }
+
+    public void removerRotina(){
+        AppDataBase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                bd.daoDataBase().deletarRotina(rotina);
+            }
+        });
+    }
+
 
 
     public void getAll(final List<Rotina> list){
@@ -44,4 +68,32 @@ public class DaoEventoBebe{
 
     }
 
+    public void atualizarRotina(){
+        AppDataBase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                bd.daoDataBase().updateRotina(rotina);
+            }
+        });
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public Rotina getRotina() {
+        return rotina;
+    }
+
+    public void setRotina(Rotina rotina) {
+        this.rotina = rotina;
+    }
+
+    public static List<Rotina> getRotinas() {
+        return rotinas;
+    }
 }

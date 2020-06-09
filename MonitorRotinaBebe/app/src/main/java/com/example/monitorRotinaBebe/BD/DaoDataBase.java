@@ -28,4 +28,10 @@ public interface DaoDataBase {
 
     @Delete
     public void deletarRotina(Rotina rotina);
+
+    @Query("SELECT * FROM rotina where evento LIKE :evento AND data LIKE :data")
+    public List<Rotina> getAllEvento(String evento, String data);
+
+    @Query("SELECT COUNT(evento) FROM rotina WHERE data LIKE :data")
+    public List<Integer> getRelatorio(String data);
 }

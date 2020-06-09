@@ -14,21 +14,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
-import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 import com.example.monitorRotinaBebe.threads.RetornarRotinas;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class FragmentoRegistroEventoBebe extends Fragment {
@@ -40,13 +39,21 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     public List<Rotina> rotinaList = new ArrayList<>();
     private AppDataBase bd;
     private RetornarRotinas retornarRotinas;
-    private RetornarRotinaDia retornarRotinaDia;
     private Date hora_data_atual;
+    private AppCompatActivity activity;
 
+    public FragmentoRegistroEventoBebe(){
+    }
+
+
+    public FragmentoRegistroEventoBebe(AppCompatActivity activity){
+        this.activity = activity;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        daoEventoBebe = new DaoEventoBebe(activity);
         carregarRotinas();
 
     }
@@ -61,7 +68,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
         popularSpinner(spinner_eventos_bebe, getContext());
         açãoBotaoRegistrarEvento(buttonRegistrarEvento);
 
-        daoEventoBebe = new DaoEventoBebe((AppCompatActivity) getContext());
+
 
         return view;
     }
@@ -79,15 +86,14 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     }
 
     private void carregarRotinas() {
-        retornarRotinaDia = new RetornarRotinaDia((AppCompatActivity) getActivity());
-
-        retornarRotinaDia.setData(retornarDataFormatada());
-        AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
+        daoEventoBebe.setData(retornarDataFormatada());
+        daoEventoBebe.getRotinaDoDia();
     }
 
     private String retornarDataFormatada(){
-        Date hora_data_atual = Calendar.getInstance().getTime();
         SimpleDateFormat dataFormatada = new SimpleDateFormat("y:M:d");
+        dataFormatada.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
+        Date hora_data_atual = Calendar.getInstance().getTime();
         String dataAtual = dataFormatada.format(hora_data_atual);
         return  dataAtual;
     }
@@ -99,15 +105,18 @@ public class FragmentoRegistroEventoBebe extends Fragment {
                 String evento = getSelectedItem(v);
 
                 SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm");
+                SimpleDateFormat dataFormatada = new SimpleDateFormat("y:M:d");
+                dataFormatada.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
                 horaFormatada.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
+
                 Date hora_data_atual = Calendar.getInstance().getTime();
+
                 String horaAtual = horaFormatada.format(hora_data_atual);
                 String dataAtual = retornarDataFormatada();
 
-
                 Rotina ultimaRotina = null;
-                if (!retornarRotinaDia.getRotinas().isEmpty()) {
-                    ultimaRotina = retornarRotinaDia.getRotinas().get(retornarRotinaDia.getRotinas().size() - 1);
+                if (!DaoEventoBebe.getRotinas().isEmpty()) {
+                    ultimaRotina = DaoEventoBebe.getRotinas().get(DaoEventoBebe.getRotinas().size() - 1);
                 }
 
                 if (ultimaRotina != null) {
@@ -129,11 +138,24 @@ public class FragmentoRegistroEventoBebe extends Fragment {
 
                 daoEventoBebe.inserirRotina(new Rotina(evento, dataAtual, horaAtual, idImagem));
 
+
+
                 Toast.makeText(getContext(), "Evento cadastro com sucesso !", Toast.LENGTH_SHORT).show();
+
+                carregarRotinas();
+                initializeFragment();
 
             }
         });
     }
+
+    private void initializeFragment(){
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, new FragmentoRecyclerRotinaDoDia());
+        fragmentTransaction.commit();
+    }
+
 
     public String getSelectedItem(View view) {
         return (String) spinner_eventos_bebe.getSelectedItem();

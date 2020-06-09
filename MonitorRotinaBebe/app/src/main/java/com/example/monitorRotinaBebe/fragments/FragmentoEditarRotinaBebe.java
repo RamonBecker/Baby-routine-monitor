@@ -20,10 +20,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.monitorRotinaBebe.BD.AppDataBase;
+import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
 import com.example.monitorRotinaBebe.threads.AtualizarRotina;
-import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 
 import java.util.Calendar;
 
@@ -37,7 +37,7 @@ public class FragmentoEditarRotinaBebe extends Fragment {
     private Rotina rotina;
     private AtualizarRotina atualizarRotina;
     private AppCompatActivity activity;
-    private RetornarRotinaDia retornarRotinaDia;
+    private DaoEventoBebe daoEventoBebe;
 
     public FragmentoEditarRotinaBebe(){
     }
@@ -45,6 +45,7 @@ public class FragmentoEditarRotinaBebe extends Fragment {
     public  FragmentoEditarRotinaBebe(Rotina rotina, AppCompatActivity activity){
         this.rotina = rotina;
         this.activity = activity;
+        daoEventoBebe = new DaoEventoBebe(activity);
     }
 
     @Nullable
@@ -68,7 +69,7 @@ public class FragmentoEditarRotinaBebe extends Fragment {
 
         acaoSelecionarHorario(selecionarhorario, horario, hora, minuto);
         botaoconfirmarAcao(button);
-        retornarRotinaDia = new RetornarRotinaDia(activity);
+        //retornarRotinaDia = new RetornarRotinaDia(activity);
         return view;
     }
 
@@ -109,10 +110,12 @@ public class FragmentoEditarRotinaBebe extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(), "Rotina atualizada", Toast.LENGTH_SHORT).show();
                 rotina.setHora(String.valueOf(horario.getText()));
-                atualizarRotina = new AtualizarRotina(rotina, (AppCompatActivity) getActivity());
-                AppDataBase.databaseWriteExecutor.execute(atualizarRotina);
-               // AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
 
+            //    atualizarRotina = new AtualizarRotina(rotina, (AppCompatActivity) getActivity());
+              //  AppDataBase.databaseWriteExecutor.execute(atualizarRotina);
+               // AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
+                daoEventoBebe.setRotina(rotina);
+                daoEventoBebe.atualizarRotina();
                 initializeFragment();
             }
         });

@@ -34,4 +34,8 @@ public class RetornarRotinas implements Runnable  {
 
         });
     }
+
+    public AppDataBase getBd() {
+        return bd;
+    }
 }

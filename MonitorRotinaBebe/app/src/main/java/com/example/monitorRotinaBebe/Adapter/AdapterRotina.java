@@ -15,47 +15,48 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.monitorRotinaBebe.BD.AppDataBase;
+
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
 import com.example.monitorRotinaBebe.fragments.FragmentoEditarRotinaBebe;
-import com.example.monitorRotinaBebe.threads.DeletarRotina;
-import com.example.monitorRotinaBebe.threads.DeletarTodasRotinas;
-import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
 import com.google.android.material.snackbar.Snackbar;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHolder> {
 
     private AppCompatActivity activity;
-    private AppDataBase db;
-    private RetornarRotinaDia retornarRotinaDia;
+    //   private AppDataBase db;
+    //  private RetornarRotinaDia retornarRotinaDia;
     private SimpleDateFormat dataFormatada;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private int posicaoRemovidoRecentemente;
     private Rotina rotinaRemovidaRecentemente;
-    private DeletarRotina deletarRotina;
     private DaoEventoBebe daoEventoBebe;
-    private DeletarTodasRotinas deletarTodasRotinas;
+    //  private DeletarTodasRotinas deletarTodasRotinas;
 
     public AdapterRotina(AppCompatActivity activity) {
         this.activity = activity;
-
+        this.daoEventoBebe = new DaoEventoBebe(activity);
         carregarDadosRotinaDia();
     }
 
     private void carregarDadosRotinaDia() {
 
-        retornarRotinaDia = new RetornarRotinaDia(activity);
+        //  retornarRotinaDia = new RetornarRotinaDia(activity);
         dataFormatada = new SimpleDateFormat("y:M:d");
+        dataFormatada.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
         Date hora_data_atual = Calendar.getInstance().getTime();
         String dataAtual = dataFormatada.format(hora_data_atual);
-        retornarRotinaDia.setData(dataAtual);
-        AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
+        daoEventoBebe.setData(dataAtual);
+        daoEventoBebe.getRotinaDoDia();
+        // retornarRotinaDia.setData(dataAtual);
+        //    AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
     }
 
     @NonNull
@@ -68,7 +69,8 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-        final Rotina rotina = retornarRotinaDia.getRotinas().get(position);
+        final Rotina rotina = DaoEventoBebe.getRotinas().get(position);
+        // retornarRotinaDia.getRotinas().get(position);
         holder.hora.setText(rotina.getHora());
         holder.data.setText(rotina.getData());
         holder.evento.setText(rotina.getEvento());
@@ -90,17 +92,19 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
             @Override
             public void onClick(View v) {
                 openDialog(position);
+
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return retornarRotinaDia.getRotinas().size();
+        return DaoEventoBebe.getRotinas().size();
+
     }
 
 
-    private void openDialog(final int posicao){
+    private void openDialog(final int posicao) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle("Atenção");
@@ -109,6 +113,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
         alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //  Toast.makeText(activity, "Rotina excluída", Toast.LENGTH_SHORT).show();
                 Toast.makeText(activity, "Rotina excluída", Toast.LENGTH_SHORT).show();
                 remover(posicao);
             }
@@ -128,24 +133,31 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
 
     public void remover(int posicao) {
         posicaoRemovidoRecentemente = posicao;
-        rotinaRemovidaRecentemente = retornarRotinaDia.getRotinas().get(posicao);
+        rotinaRemovidaRecentemente = DaoEventoBebe.getRotinas().get(posicao);
+        //retornarRotinaDia.getRotinas().get(posicao);
 
-        Rotina rotina_a_ser_removida = retornarRotinaDia.getRotinas().get(posicao);
-        deletarRotina = new DeletarRotina(rotina_a_ser_removida, activity);
-        AppDataBase.databaseWriteExecutor.execute(deletarRotina);
-        retornarRotinaDia.getRotinas().remove(posicao);
+        Rotina rotina_a_ser_removida = DaoEventoBebe.getRotinas().get(posicao);
+        //retornarRotinaDia.getRotinas().get(posicao);
+        DaoEventoBebe.getRotinas().remove(posicao);
+        daoEventoBebe.setRotina(rotinaRemovidaRecentemente);
+        daoEventoBebe.removerRotina();
+        // deletarRotina = new DeletarRotina(rotina_a_ser_removida, activity);
+        //AppDataBase.databaseWriteExecutor.execute(deletarRotina);
+
+        // retornarRotinaDia.getRotinas().remove(posicao);
         notifyItemRemoved(posicao);
         notifyItemRangeChanged(posicao, this.getItemCount());
 
-        daoEventoBebe = new DaoEventoBebe(activity);
+        //daoEventoBebe = new DaoEventoBebe(activity);
 
 
-        Snackbar snackbar = Snackbar.make(activity.findViewById(R.id.RelativeLayout), "Item deletado",Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(activity.findViewById(R.id.RelativeLayout), "Item deletado", Snackbar.LENGTH_LONG);
         snackbar.setAction("Desfazer?", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 daoEventoBebe.inserirRotina(rotinaRemovidaRecentemente);
-                retornarRotinaDia.getRotinas().add(posicaoRemovidoRecentemente,rotinaRemovidaRecentemente);
+                DaoEventoBebe.getRotinas().add(posicaoRemovidoRecentemente, rotinaRemovidaRecentemente);
+                //     retornarRotinaDia.getRotinas().add(posicaoRemovidoRecentemente,rotinaRemovidaRecentemente);
                 notifyItemInserted(posicaoRemovidoRecentemente);
 
             }

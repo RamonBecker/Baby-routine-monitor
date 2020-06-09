@@ -11,22 +11,23 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.monitorRotinaBebe.Adapter.AdapterRotina;
 import com.example.monitorRotinaBebe.BD.AppDataBase;
+import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.controller.ControllerAtor;
 import com.example.monitorRotinaBebe.controller.ControllerFilme;
 import com.example.monitorRotinaBebe.fragments.FragmentoRecyclerRotinaDoDia;
 import com.example.monitorRotinaBebe.fragments.FragmentoRegistroEventoBebe;
+import com.example.monitorRotinaBebe.fragments.FragmentoRecyclerRotinaEvento;
 import com.example.monitorRotinaBebe.fragments.RecyclerFragmentAtor;
 import com.example.monitorRotinaBebe.fragments.RecyclerFragmentDiretor;
 import com.example.monitorRotinaBebe.fragments.RecyclerFragmentFilme;
 import com.example.monitorRotinaBebe.fragments.RegisterPerson;
 import com.example.monitorRotinaBebe.fragments.RegisterFilm;
-import com.example.monitorRotinaBebe.threads.RetornarRotinaDia;
+import com.example.monitorRotinaBebe.threads.RetornarRotinas;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,17 +38,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private RegisterPerson registerPerson;
-    private RetornarRotinaDia retornarRotinaDia;
     private AdapterRotina adapterRotina;
-
+    private RetornarRotinas retornarRotinas;
+    private DaoEventoBebe daoEventoBebe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        retornarRotinaDia = new RetornarRotinaDia(this);
-        AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
+        daoEventoBebe = new DaoEventoBebe(this);
+        daoEventoBebe.getRotinaDoDia();
+
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -103,11 +105,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (menuItem == R.id.menuRegistrarEvento) {
-            initializeFragment(new FragmentoRegistroEventoBebe());
+            initializeFragment(new FragmentoRegistroEventoBebe(this));
         }
 
         if (menuItem == R.id.menuMostrarRotinaDoDia) {
             initializeFragment(new FragmentoRecyclerRotinaDoDia(this));
+        }
+        if (menuItem == R.id.menuDormiu){
+            initializeFragment(new FragmentoRecyclerRotinaEvento(this,"Dormiu"));
+        }
+        if (menuItem == R.id.menuAcordou){
+            initializeFragment(new FragmentoRecyclerRotinaEvento(this,"Acordou"));
+        }
+        if (menuItem == R.id.menuTrocou){
+            initializeFragment(new FragmentoRecyclerRotinaEvento(this,"Trocou"));
+        }
+        if (menuItem == R.id.menuMamou){
+            initializeFragment(new FragmentoRecyclerRotinaEvento(this,"Mamou"));
         }
 
         return true;
