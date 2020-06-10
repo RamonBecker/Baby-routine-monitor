@@ -6,41 +6,41 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.monitorRotinaBebe.BD.AppDataBase;
+import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
-import com.example.monitorRotinaBebe.threads.RetornarEventosRotina;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class AdapterRotinaEvento extends RecyclerView.Adapter<AdapterRotinaEvento.MyViewHolder> {
 
-    private RetornarEventosRotina retornarEventosRotina;
     private AppCompatActivity activity;
     private AppDataBase db;
+    private DaoEventoBebe daoEventoBebe;
 
     public AdapterRotinaEvento(AppCompatActivity activity, String evento){
         this.activity = activity;
+        this.daoEventoBebe = new DaoEventoBebe(activity);
         carregarDadosRotinaEvento(evento);
+
     }
 
     private void carregarDadosRotinaEvento(String evento){
 
         SimpleDateFormat dataFormatada = new SimpleDateFormat("y:M:d");
+        dataFormatada.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
         Date hora_data_atual = Calendar.getInstance().getTime();
         String dataAtual = dataFormatada.format(hora_data_atual);
-        
-        retornarEventosRotina = new RetornarEventosRotina(activity);
-        retornarEventosRotina.setEvento(evento);
-        retornarEventosRotina.setData(dataAtual);
-        AppDataBase.databaseWriteExecutor.execute(retornarEventosRotina);
+        daoEventoBebe.setEvento(evento);
+        daoEventoBebe.setData(dataAtual);
+        daoEventoBebe.getRotinaEvento();
+
     }
 
     @NonNull
@@ -52,7 +52,7 @@ public class AdapterRotinaEvento extends RecyclerView.Adapter<AdapterRotinaEvent
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final Rotina rotina = retornarEventosRotina. getRotinas().get(position);
+        final Rotina rotina = DaoEventoBebe.getRotinasEvento().get(position);
         holder.hora.setText(rotina.getHora());
         holder.data.setText(rotina.getData());
         holder.evento.setText(rotina.getEvento());
@@ -61,7 +61,7 @@ public class AdapterRotinaEvento extends RecyclerView.Adapter<AdapterRotinaEvent
 
     @Override
     public int getItemCount() {
-        return  retornarEventosRotina.getRotinas().size();
+        return  DaoEventoBebe.getRotinasEvento().size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

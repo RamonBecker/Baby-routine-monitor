@@ -32,6 +32,9 @@ public interface DaoDataBase {
     @Query("SELECT * FROM rotina where evento LIKE :evento AND data LIKE :data")
     public List<Rotina> getAllEvento(String evento, String data);
 
-    @Query("SELECT COUNT(evento) FROM rotina WHERE data LIKE :data")
-    public List<Integer> getRelatorio(String data);
+    @Query("SELECT COUNT(*) FROM rotina WHERE data LiKE :data and evento LIKE :evento")
+    public int contarEventos(String data, String evento);
+
+    @Query("SELECT DISTINCT data FROM rotina")
+    public List<String> getDatas();
 }

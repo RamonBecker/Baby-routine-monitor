@@ -1,18 +1,11 @@
 package com.example.monitorRotinaBebe.Adapter.touch;
 
-import android.content.DialogInterface;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.monitorRotinaBebe.Adapter.AdapterFilme;
 import com.example.monitorRotinaBebe.Adapter.AdapterRotina;
-import com.example.monitorRotinaBebe.BD.AppDataBase;
-import com.example.monitorRotinaBebe.threads.AtualizarRotina;
 
 public class TouchRotina extends ItemTouchHelper.SimpleCallback {
 

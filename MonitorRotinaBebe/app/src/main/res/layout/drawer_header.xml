@@ -2,17 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="150dp"
     android:background="#534D4D"
     android:forceDarkAllowed="false"
-    android:foregroundTint="#554F4F">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="241dp"
-        android:layout_height="131dp"
-        app:srcCompat="@drawable/filmes"
-        tools:layout_editor_absoluteX="-23dp"
-        tools:layout_editor_absoluteY="10dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:foregroundTint="#554F4F"/>

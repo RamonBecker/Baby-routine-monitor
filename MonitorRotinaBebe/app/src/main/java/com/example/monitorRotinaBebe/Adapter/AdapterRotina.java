@@ -69,7 +69,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-        final Rotina rotina = DaoEventoBebe.getRotinas().get(position);
+        final Rotina rotina = DaoEventoBebe.getRotinasdoDia().get(position);
         // retornarRotinaDia.getRotinas().get(position);
         holder.hora.setText(rotina.getHora());
         holder.data.setText(rotina.getData());
@@ -99,7 +99,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
 
     @Override
     public int getItemCount() {
-        return DaoEventoBebe.getRotinas().size();
+        return DaoEventoBebe.getRotinasdoDia().size();
 
     }
 
@@ -133,12 +133,12 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
 
     public void remover(int posicao) {
         posicaoRemovidoRecentemente = posicao;
-        rotinaRemovidaRecentemente = DaoEventoBebe.getRotinas().get(posicao);
+        rotinaRemovidaRecentemente = DaoEventoBebe.getRotinasdoDia().get(posicao);
         //retornarRotinaDia.getRotinas().get(posicao);
 
-        Rotina rotina_a_ser_removida = DaoEventoBebe.getRotinas().get(posicao);
+        Rotina rotina_a_ser_removida = DaoEventoBebe.getRotinasdoDia().get(posicao);
         //retornarRotinaDia.getRotinas().get(posicao);
-        DaoEventoBebe.getRotinas().remove(posicao);
+        DaoEventoBebe.getRotinasdoDia().remove(posicao);
         daoEventoBebe.setRotina(rotinaRemovidaRecentemente);
         daoEventoBebe.removerRotina();
         // deletarRotina = new DeletarRotina(rotina_a_ser_removida, activity);
@@ -156,7 +156,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
             @Override
             public void onClick(View v) {
                 daoEventoBebe.inserirRotina(rotinaRemovidaRecentemente);
-                DaoEventoBebe.getRotinas().add(posicaoRemovidoRecentemente, rotinaRemovidaRecentemente);
+                DaoEventoBebe.getRotinasdoDia().add(posicaoRemovidoRecentemente, rotinaRemovidaRecentemente);
                 //     retornarRotinaDia.getRotinas().add(posicaoRemovidoRecentemente,rotinaRemovidaRecentemente);
                 notifyItemInserted(posicaoRemovidoRecentemente);
 

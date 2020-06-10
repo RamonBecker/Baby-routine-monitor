@@ -19,11 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
-import com.example.monitorRotinaBebe.threads.AtualizarRotina;
 
 import java.util.Calendar;
 
@@ -35,7 +33,6 @@ public class FragmentoEditarRotinaBebe extends Fragment {
     private EditText evento;
     private EditText horario;
     private Rotina rotina;
-    private AtualizarRotina atualizarRotina;
     private AppCompatActivity activity;
     private DaoEventoBebe daoEventoBebe;
 

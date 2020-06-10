@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Relatórios dos últimos dias">
+    <item android:title="Rotina">
+        <menu>
+            <item
+                android:id="@+id/menuRegistrarEvento"
+                android:title="Registrar evento" />
+            <item
+                android:id="@+id/menuMostrarRotinaDoDia"
+                android:title="Mostrar rotina do dia" />
+        </menu>
+    </item>
+    <item android:title="Mostrar eventos do dia">
         <menu>
             <item
                 android:id="@+id/menuAcordou"
@@ -17,40 +27,11 @@
                 android:title="Dormiu" />
         </menu>
     </item>
-    <item android:title="General">
-        <menu>
-    <item
-        android:id="@+id/menuAtores"
-        android:icon="@drawable/ic_person_outline_black_24dp"
-        android:title="Atores" />
-    <item
-        android:id="@+id/menuDiretores"
-        android:icon="@drawable/ic_videocam_black_24dp"
-        android:title="Diretores" />
-    <item
-        android:id="@+id/menuFilmes"
-        android:icon="@drawable/ic_local_movies_black_24dp"
-        android:title="Filmes" />
+    <item android:title="Relatório" >
+        <menu >
             <item
-                android:id="@+id/menuCadastrarAtor"
-                android:icon="@drawable/ic_person_black_24dp"
-                android:title="Cadastrar Ator" />
-            <item
-                android:id="@+id/menuItemCadastrarDiretor"
-                android:icon="@drawable/ic_person_black_24dp"
-                android:title="Cadastrar Diretor" />
-            <item
-                android:id="@+id/menuCadastrarFilme"
-                android:icon="@drawable/ic_add_to_photos_black_24dp"
-                android:title="Cadastrar Filme" />
-            <item
-                android:id="@+id/menuRegistrarEvento"
-                android:icon="@android:drawable/ic_menu_add"
-                android:title="Registrar evento" />
-            <item
-                android:id="@+id/menuMostrarRotinaDoDia"
-                android:icon="@android:drawable/ic_menu_agenda"
-                android:title="Mostrar rotina do dia" />
+                android:id="@+id/menuRelatorioUltimosDias"
+                android:title="Resumo dos últimos dias" />
         </menu>
     </item>
 </menu>

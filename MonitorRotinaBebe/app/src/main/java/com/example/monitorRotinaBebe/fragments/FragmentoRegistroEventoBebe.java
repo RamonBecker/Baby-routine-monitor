@@ -21,7 +21,6 @@ import com.example.monitorRotinaBebe.BD.AppDataBase;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.entites.Rotina;
-import com.example.monitorRotinaBebe.threads.RetornarRotinas;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     private SimpleDateFormat horaFormatada;
     public List<Rotina> rotinaList = new ArrayList<>();
     private AppDataBase bd;
-    private RetornarRotinas retornarRotinas;
+   // private RetornarRotinas retornarRotinas;
     private Date hora_data_atual;
     private AppCompatActivity activity;
 
@@ -115,8 +114,8 @@ public class FragmentoRegistroEventoBebe extends Fragment {
                 String dataAtual = retornarDataFormatada();
 
                 Rotina ultimaRotina = null;
-                if (!DaoEventoBebe.getRotinas().isEmpty()) {
-                    ultimaRotina = DaoEventoBebe.getRotinas().get(DaoEventoBebe.getRotinas().size() - 1);
+                if (!DaoEventoBebe.getRotinasdoDia().isEmpty()) {
+                    ultimaRotina = DaoEventoBebe.getRotinasdoDia().get(DaoEventoBebe.getRotinasdoDia().size() - 1);
                 }
 
                 if (ultimaRotina != null) {
