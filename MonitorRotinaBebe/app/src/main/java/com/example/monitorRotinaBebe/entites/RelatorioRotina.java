@@ -3,14 +3,31 @@ package com.example.monitorRotinaBebe.entites;
 import java.util.List;
 
 public class RelatorioRotina {
-    private String data;
-    private List<String> horas;
-    private List<String> minutos;
 
-    public RelatorioRotina(String data, List<String> horas, List<String> minutos) {
+    private String data;
+    private RelatorioDormiu relatorioDormiu;
+    private RelatorioMamou relatorioMamou;
+    private RelatorioTrocou relatorioTrocou;
+
+    public RelatorioRotina() {
+
+    }
+
+    public RelatorioRotina(String data) {
         this.data = data;
-        this.horas = horas;
-        this.minutos = minutos;
+    }
+
+
+    public RelatorioRotina(RelatorioDormiu relatorioDormiu) {
+        this.relatorioDormiu = relatorioDormiu;
+    }
+
+    public RelatorioRotina(RelatorioMamou relatorioMamou) {
+        this.relatorioMamou = relatorioMamou;
+    }
+
+    public RelatorioRotina(RelatorioTrocou relatorioTrocou) {
+        this.relatorioTrocou = relatorioTrocou;
     }
 
     public String getData() {
@@ -21,28 +38,39 @@ public class RelatorioRotina {
         this.data = data;
     }
 
-    public List<String> getHoras() {
-        return horas;
+
+    public RelatorioDormiu getRelatorioDormiu() {
+        return relatorioDormiu;
     }
 
-    public void setHoras(List<String> horas) {
-        this.horas = horas;
+    public void setRelatorioDormiu(RelatorioDormiu relatorioDormiu) {
+        this.relatorioDormiu = relatorioDormiu;
     }
 
-    public List<String> getMinutos() {
-        return minutos;
+    public RelatorioMamou getRelatorioMamou() {
+        return relatorioMamou;
     }
 
-    public void setMinutos(List<String> minutos) {
-        this.minutos = minutos;
+    public void setRelatorioMamou(RelatorioMamou relatorioMamou) {
+        this.relatorioMamou = relatorioMamou;
     }
+
+    public RelatorioTrocou getRelatorioTrocou() {
+        return relatorioTrocou;
+    }
+
+    public void setRelatorioTrocou(RelatorioTrocou relatorioTrocou) {
+        this.relatorioTrocou = relatorioTrocou;
+    }
+
 
     @Override
     public String toString() {
         return "RelatorioRotina{" +
                 "data='" + data + '\'' +
-                ", horas=" + horas +
-                ", minutos=" + minutos +
+                ", relatorioDormiu=" + relatorioDormiu +
+                ", relatorioMamou=" + relatorioMamou +
+                ", relatorioTrocou=" + relatorioTrocou +
                 '}';
     }
 }

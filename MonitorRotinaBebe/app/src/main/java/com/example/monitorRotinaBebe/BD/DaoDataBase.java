@@ -33,7 +33,7 @@ public interface DaoDataBase {
     public List<Rotina> getAllEvento(String evento, String data);
 
     @Query("SELECT COUNT(*) FROM rotina WHERE data LiKE :data and evento LIKE :evento")
-    public int contarEventos(String data, String evento);
+    public long contarEventos(String data, String evento);
 
     @Query("SELECT DISTINCT data FROM rotina")
     public List<String> getDatas();
