@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,14 +12,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.monitorRotinaBebe.Adapter.AdapterRotina;
-import com.example.monitorRotinaBebe.Adapter.touch.TouchRotina;
-import com.example.monitorRotinaBebe.BD.AppDataBase;
+import com.example.monitorRotinaBebe.Adapter.AdapterRotinaDoDia;
+import com.example.monitorRotinaBebe.Adapter.touch.TouchRotinaDoDia;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.activity.MainActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,7 +26,7 @@ public class FragmentoRecyclerRotinaDoDia extends Fragment {
 
 
     private RecyclerView recyclerView;
-    private AdapterRotina adapterRotina;
+    private AdapterRotinaDoDia adapterRotinaDoDia;
     public static String REMOVER = "";
     private MainActivity activity;
     private MainActivity mainActivity;
@@ -42,11 +38,8 @@ public class FragmentoRecyclerRotinaDoDia extends Fragment {
 
     public FragmentoRecyclerRotinaDoDia(MainActivity activity) {
         this.activity = activity;
-
-    //    retornarRotinaDia = new RetornarRotinaDia(activity);
-  //      retornarRotinas = new RetornarRotinas(activity);
-      //  AppDataBase.databaseWriteExecutor.execute(retornarRotinaDia);
-     //   AppDataBase.databaseWriteExecutor.execute(retornarRotinas);
+        this.daoEventoBebe = new DaoEventoBebe(activity);
+        carregarDadosRotinaDia();
     }
 
     @Nullable
@@ -55,14 +48,15 @@ public class FragmentoRecyclerRotinaDoDia extends Fragment {
         View view = inflater.inflate(R.layout.recycler, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-        adapterRotina = new AdapterRotina((AppCompatActivity) getActivity());
-        recyclerView.setAdapter(adapterRotina);
+        adapterRotinaDoDia = new AdapterRotinaDoDia((AppCompatActivity) getActivity());
+        recyclerView.setAdapter(adapterRotinaDoDia);
         this.daoEventoBebe = new DaoEventoBebe(activity);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(new TouchRotina(adapterRotina, activity));
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new TouchRotinaDoDia(adapterRotinaDoDia, activity));
         touchHelper.attachToRecyclerView(recyclerView);
         carregarDadosRotinaDia();
         return view;
     }
+
     private void carregarDadosRotinaDia() {
 
         SimpleDateFormat dataFormatada = new SimpleDateFormat("y:M:d");
@@ -73,7 +67,4 @@ public class FragmentoRecyclerRotinaDoDia extends Fragment {
         daoEventoBebe.getRotinaDoDia();
 
     }
-
-
-
 }

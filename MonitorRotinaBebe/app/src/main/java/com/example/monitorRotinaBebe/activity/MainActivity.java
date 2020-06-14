@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
-import com.example.monitorRotinaBebe.Adapter.AdapterRotina;
+import com.example.monitorRotinaBebe.Adapter.AdapterRotinaDoDia;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 import com.example.monitorRotinaBebe.fragments.FragmentoRecyclerRotinaDoDia;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private AdapterRotina adapterRotina;
+    private AdapterRotinaDoDia adapterRotinaDoDia;
     private DaoEventoBebe daoEventoBebe;
 
     @Override
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public  void setAdapterRotina(AdapterRotina adapterRotina) {
-        this.adapterRotina = adapterRotina;
+    public  void setAdapterRotinaDoDia(AdapterRotinaDoDia adapterRotinaDoDia) {
+        this.adapterRotinaDoDia = adapterRotinaDoDia;
     }
 }

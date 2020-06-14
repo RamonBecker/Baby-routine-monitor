@@ -10,8 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.monitorRotinaBebe.Adapter.AdapterRotinaEvento;
+import com.example.monitorRotinaBebe.Adapter.touch.TouchRotinaEvento;
 import com.example.monitorRotinaBebe.R;
 
 public class FragmentoRecyclerRotinaEvento extends Fragment {
@@ -40,6 +42,10 @@ public class FragmentoRecyclerRotinaEvento extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         adapterRotinaEvento = new AdapterRotinaEvento(activity, evento);
         recyclerView.setAdapter(adapterRotinaEvento);
+
+
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new TouchRotinaEvento(adapterRotinaEvento,activity));
+        touchHelper.attachToRecyclerView(recyclerView);
         return view;
     }
 }

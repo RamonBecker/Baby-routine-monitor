@@ -10,7 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.monitorRotinaBebe.Adapter.AdapterRelatorio;
 import com.example.monitorRotinaBebe.BD.DaoEventoBebe;
 import com.example.monitorRotinaBebe.R;
 
@@ -26,6 +29,8 @@ public class FragmentoRelatorioRotina extends Fragment {
     private String dataAtual;
     private Date hora_data_atual;
     private SimpleDateFormat dataFormatada;
+    private RecyclerView recyclerView;
+    private AdapterRelatorio adapterRelatorio;
 
     public FragmentoRelatorioRotina() {
 
@@ -34,8 +39,6 @@ public class FragmentoRelatorioRotina extends Fragment {
     public FragmentoRelatorioRotina(AppCompatActivity activity) {
 
         this.activity = activity;
-        daoEventoBebe = new DaoEventoBebe(activity);
-
 
     }
 
@@ -43,34 +46,14 @@ public class FragmentoRelatorioRotina extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.card_resumo_ultimos_dias, container, false);
-
-
-        daoEventoBebe = new DaoEventoBebe(activity);
-        dataFormatada = new SimpleDateFormat("y:M:d");
-        dataFormatada.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
-        hora_data_atual = Calendar.getInstance().getTime();
-        dataAtual = dataFormatada.format(hora_data_atual);
-        // daoEventoBebe.setEvento("Acordou");
-        //  daoEventoBebe.setData(dataAtual);
-        daoEventoBebe.inicializarRelatorios();
-        daoEventoBebe.n_vezes_Trocados_Mamou(dataAtual);
+        View view = inflater.inflate(R.layout.recycler, container, false);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+        adapterRelatorio = new AdapterRelatorio(this.activity);
+        recyclerView.setAdapter(adapterRelatorio);
 
         Log.i("N trocados", "" + DaoEventoBebe.n_vezes_trocados);
-        horas();
         return view;
     }
 
-    private void horas() {
-
-
-        for (String data : DaoEventoBebe.getDatas()) {
-            daoEventoBebe.horasDormidas(data);
-            daoEventoBebe.n_vezes_Trocados_Mamou(data);
-        }
-
-
-        Log.i("Relatorios list", "" + daoEventoBebe.getRelatorioRotinas());
-
-    }
 }

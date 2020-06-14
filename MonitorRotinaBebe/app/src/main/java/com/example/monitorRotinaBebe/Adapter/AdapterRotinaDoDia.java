@@ -24,10 +24,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHolder> {
+public class AdapterRotinaDoDia extends RecyclerView.Adapter<AdapterRotinaDoDia.MyViewHolder> {
 
     private AppCompatActivity activity;
     //   private AppDataBase db;
@@ -40,7 +41,7 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     private DaoEventoBebe daoEventoBebe;
     //  private DeletarTodasRotinas deletarTodasRotinas;
 
-    public AdapterRotina(AppCompatActivity activity) {
+    public AdapterRotinaDoDia(AppCompatActivity activity) {
         this.activity = activity;
         this.daoEventoBebe = new DaoEventoBebe(activity);
         carregarDadosRotinaDia();
@@ -104,6 +105,20 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
     }
 
 
+    public void mover(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = 0; i < toPosition; i++) {
+                Collections.swap( DaoEventoBebe.getRotinasdoDia(), i , i+1);
+            }
+        }else{
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap( DaoEventoBebe.getRotinasdoDia(), i , i-   1);
+                }
+            }
+        notifyItemMoved(fromPosition, toPosition);
+
+    }
+
     private void openDialog(final int posicao) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
@@ -157,7 +172,6 @@ public class AdapterRotina extends RecyclerView.Adapter<AdapterRotina.MyViewHold
             public void onClick(View v) {
                 daoEventoBebe.inserirRotina(rotinaRemovidaRecentemente);
                 DaoEventoBebe.getRotinasdoDia().add(posicaoRemovidoRecentemente, rotinaRemovidaRecentemente);
-                //     retornarRotinaDia.getRotinas().add(posicaoRemovidoRecentemente,rotinaRemovidaRecentemente);
                 notifyItemInserted(posicaoRemovidoRecentemente);
 
             }

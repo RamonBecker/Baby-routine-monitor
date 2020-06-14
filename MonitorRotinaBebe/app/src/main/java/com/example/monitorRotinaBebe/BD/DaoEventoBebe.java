@@ -1,6 +1,5 @@
 package com.example.monitorRotinaBebe.BD;
 
-import android.content.Intent;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -127,32 +126,31 @@ public class DaoEventoBebe {
                 break;
             }
         }
-        Log.i("data",""+data);
+        Log.i("data", "" + data);
         for (Rotina rotina : rotinasAll) {
             if (data.equalsIgnoreCase(rotina.getData())) {
                 if (rotina.getEvento().equalsIgnoreCase("Trocou")) {
                     RelatorioTrocou relatorioTrocou = null;
-                    if(relatorioRotinas.get(posicaoDataEncontrada).getRelatorioTrocou() == null){
+                    if (relatorioRotinas.get(posicaoDataEncontrada).getRelatorioTrocou() == null) {
                         relatorioTrocou = new RelatorioTrocou();
-                    }else{
+                    } else {
                         relatorioTrocou = relatorioRotinas.get(posicaoDataEncontrada).getRelatorioTrocou();
                     }
-                    long n_vezes_trocou = contarEventos(data,"Trocou");
-                    relatorioTrocou.setEvento("Trocou");
+                    long n_vezes_trocou = contarEventos(data, "Trocou");
+                    relatorioTrocou.setEvento("O bêbe foi trocado: ");
                     relatorioTrocou.setN_vezes_bebe_trocado(n_vezes_trocou);
                     relatorioRotinas.get(posicaoDataEncontrada).setRelatorioTrocou(relatorioTrocou);
                 }
-                if(rotina.getEvento().equalsIgnoreCase("Mamou")){
-                    Log.i("n mamou",""+contarEventos(data,"Mamou"));
+                if (rotina.getEvento().equalsIgnoreCase("Mamou")) {
                     RelatorioMamou relatorioMamou = null;
-                    if(relatorioRotinas.get(posicaoDataEncontrada).getRelatorioMamou() == null){
+                    if (relatorioRotinas.get(posicaoDataEncontrada).getRelatorioMamou() == null) {
                         relatorioMamou = new RelatorioMamou();
-                    }else{
+                    } else {
                         relatorioMamou = relatorioRotinas.get(posicaoDataEncontrada).getRelatorioMamou();
                     }
-                    long n_vezes_mamou = contarEventos(data,"Mamou");
-                    relatorioMamou.setEvento("Mamou");
-                    relatorioMamou.setN_vezes_bebe_trocado(n_vezes_mamou);
+                    long n_vezes_mamou = contarEventos(data, "Mamou");
+                    relatorioMamou.setEvento("O bebê mamou: ");
+                    relatorioMamou.setN_vezes_bebe_mamou(n_vezes_mamou);
                     relatorioRotinas.get(posicaoDataEncontrada).setRelatorioMamou(relatorioMamou);
                 }
             }
@@ -160,11 +158,9 @@ public class DaoEventoBebe {
     }
 
 
-    public void horasDormidas(String data) {
-        Log.i("Data recebida", "" + data);
+    public void calcDorme(String data) {
         int posicaoDataEncontrada = 0;
         boolean dataEncontrada = false;
-
         for (int i = 0; i < relatorioRotinas.size(); i++) {
             if (relatorioRotinas.get(i).getData().contentEquals(data)) {
                 posicaoDataEncontrada = i;
@@ -178,50 +174,93 @@ public class DaoEventoBebe {
             posicaoDataEncontrada = relatorioRotinas.size() - 1;
         }
 
-        String[] horasMinutos = null;
-        List<String> horas = new ArrayList<>();
-        List<String> minutos = new ArrayList<>();
 
         for (Rotina rotina : rotinasAll) {
             if (data.equalsIgnoreCase(rotina.getData())) {
                 if (rotina.getEvento().equalsIgnoreCase("Dormiu")) {
-                    RelatorioDormiu relatorioDormiu = null;
-                    if (relatorioRotinas.get(posicaoDataEncontrada).getRelatorioDormiu() == null) {
-                        relatorioDormiu = new RelatorioDormiu();
-                        relatorioDormiu.setEvento("Dormiu");
-                    } else {
-                        relatorioDormiu = relatorioRotinas.get(posicaoDataEncontrada).getRelatorioDormiu();
-                    }
+                    relatorioRotinas.get(posicaoDataEncontrada).getListDormiu().add(rotina);
 
-                    horasMinutos = rotina.getHora().split(":");
-                    int horasConvertida = Integer.parseInt(horasMinutos[0]);
-                    int minutosConterido = Integer.parseInt(horasMinutos[1]);
-
-                    //       Log.i("Data encontrada", "" + relatorioRotinas.get(posicaoDataEncontrada));
-                    //       Log.i("Rotina", "" + rotina);
-                    long horaRetorno = relatorioDormiu.getHoras();
-                    long somaHora = horaRetorno + horasConvertida;
-
-                    long minutosRetorno = relatorioDormiu.getMinutos();
-                    long somaMinutos = minutosRetorno + minutosConterido;
-                    //      Log.i("Soma das horas", "" + somaHora);
-                    //       Log.i("Soma dos minutos", "" + minutos);
-                    if (somaMinutos >= 60) {
-                        long diferencaMinuto = somaMinutos - 60;
-                        relatorioDormiu.setMinutos(diferencaMinuto);
-                        somaHora = somaHora + 1;
-
-                    } else {
-                        relatorioDormiu.setMinutos(somaMinutos);
-                    }
-                    relatorioDormiu.setHoras(somaHora);
-                    relatorioRotinas.get(posicaoDataEncontrada).setRelatorioDormiu(relatorioDormiu);
+                }
+                if (rotina.getEvento().equalsIgnoreCase("Acordou")) {
+                    relatorioRotinas.get(posicaoDataEncontrada).getListAcordou().add(rotina);
                 }
             }
         }
 
+        int tamanhoListAcordou = relatorioRotinas.get(posicaoDataEncontrada).getListAcordou().size();
 
+        int auxMinutosDormiu = 0;
+        Rotina auxRotinaDormiu = null;
+        Rotina auxRotinaAcordou = null;
+        int auxCountElementosDormiu = 0;
+        int j = 0;
+        String[] horasMinutosAcordou = null;
+        String[] horasMinutosDormiu = null;
+        boolean auxCheckHora = true;
+
+        int auxHoraFinal = 0;
+        int auxHoraInicial = 0;
+        int auxMinuto = 0;
+        int auxCalcMinuto = 0;
+        int auxCalcHora = 0;
+        int auxHora = 0;
+
+        // calcular as horas
+        for (int i = 0; i < relatorioRotinas.get(posicaoDataEncontrada).getListDormiu().size(); i++) {
+            if (auxCountElementosDormiu > tamanhoListAcordou) {
+                break;
+            }
+
+            if (j < relatorioRotinas.get(posicaoDataEncontrada).getListAcordou().size()) {
+                if (relatorioRotinas.get(posicaoDataEncontrada).getListAcordou() != null && relatorioRotinas.get(posicaoDataEncontrada).getListAcordou().get(j) != null) {
+                    auxRotinaAcordou = relatorioRotinas.get(posicaoDataEncontrada).getListAcordou().get(j);
+                    horasMinutosAcordou = auxRotinaAcordou.getHora().split(":");
+                    auxHoraFinal = Integer.parseInt(horasMinutosAcordou[0]);
+                    auxCheckHora = true;
+                } else {
+                    auxCheckHora = false;
+                }
+                j++;
+            }
+
+            auxRotinaDormiu = relatorioRotinas.get(posicaoDataEncontrada).getListDormiu().get(i);
+            horasMinutosDormiu = auxRotinaDormiu.getHora().split(":");
+            auxHoraInicial = Integer.parseInt(horasMinutosDormiu[0]);
+
+            if (auxCheckHora) {
+                auxCalcHora += auxHoraFinal - auxHoraInicial;
+            }
+            auxCountElementosDormiu++;
+        }
+
+
+        //Calcular minuto
+        String[] minutosAcordou = null;
+        for (int i = 0; i < relatorioRotinas.get(posicaoDataEncontrada).getListAcordou().size(); i++) {
+            Rotina rotina = relatorioRotinas.get(posicaoDataEncontrada).getListAcordou().get(i);
+            minutosAcordou = rotina.getHora().split(":");
+            auxMinuto = Integer.parseInt(minutosAcordou[1]);
+            auxCalcMinuto += auxMinuto;
+
+            if (auxCalcMinuto > 60) {
+                auxCalcMinuto = auxCalcMinuto - 60;
+                auxHora += 1;
+            }
+        }
+
+        if (auxHora > 0) {
+            auxCalcHora = auxCalcHora + auxHora;
+        }
+        Log.i("Hora final", "calcDorme: " + auxCalcHora);
+        Log.i("Minuto Final", "Minuto Final" + auxCalcMinuto);
+
+        RelatorioDormiu relatorioDormiu = new RelatorioDormiu();
+        relatorioDormiu.setEvento("O bebê dormiu por: ");
+        relatorioDormiu.setHoras(auxCalcHora);
+        relatorioDormiu.setMinutos(auxCalcMinuto);
+        relatorioRotinas.get(posicaoDataEncontrada).setRelatorioDormiu(relatorioDormiu);
     }
+
 
     public void atualizarRotina() {
         AppDataBase.databaseWriteExecutor.execute(new Runnable() {

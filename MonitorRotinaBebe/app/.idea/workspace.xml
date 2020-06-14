@@ -48,7 +48,7 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../ProgramacaoAndroid/RecyclerViewProject-projetoBD-ROOM/app" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RecentsManager">
@@ -152,10 +152,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1591749026213" />
-    <state x="841" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1591924486210">
+    <state x="841" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1592008009373">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="841" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1591924486210" />
+    <state x="841" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592008009373" />
+    <state x="402" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591995929450">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="402" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1591995929450" />
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591712535022">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -164,34 +168,34 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1591919612933" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1591483980101">
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1592073931400">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1591483980101" />
-    <state width="1323" height="210" key="GridCell.Tab.0.bottom" timestamp="1591924806462">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592073931400" />
+    <state width="1323" height="145" key="GridCell.Tab.0.bottom" timestamp="1592151101144">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="210" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1591924806462" />
-    <state width="1323" height="210" key="GridCell.Tab.0.center" timestamp="1591924806462">
+    <state width="1323" height="145" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592151101144" />
+    <state width="1323" height="145" key="GridCell.Tab.0.center" timestamp="1592151101144">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="210" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1591924806462" />
-    <state width="1323" height="210" key="GridCell.Tab.0.left" timestamp="1591924806462">
+    <state width="1323" height="145" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592151101144" />
+    <state width="1323" height="145" key="GridCell.Tab.0.left" timestamp="1592151101144">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="210" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1591924806462" />
-    <state width="1323" height="210" key="GridCell.Tab.0.right" timestamp="1591924806462">
+    <state width="1323" height="145" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592151101144" />
+    <state width="1323" height="145" key="GridCell.Tab.0.right" timestamp="1592151101144">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="210" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1591924806462" />
+    <state width="1323" height="145" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592151101144" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1591712663767">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="499" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1591712663767" />
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1591984305990">
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1592156084033">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1591984305990" />
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592156084033" />
     <state x="389" y="0" key="refactoring.ChangeSignatureDialog" timestamp="1591455291349">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -200,10 +204,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1591914623183" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1591985779893">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592092214254">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591985779893" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1592092214254" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,5 +1,8 @@
 package com.example.monitorRotinaBebe.entites;
 
+import com.example.monitorRotinaBebe.R;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class RelatorioRotina {
@@ -8,6 +11,8 @@ public class RelatorioRotina {
     private RelatorioDormiu relatorioDormiu;
     private RelatorioMamou relatorioMamou;
     private RelatorioTrocou relatorioTrocou;
+    private List<Rotina> listDormiu;
+    private List<Rotina> listAcordou;
 
     public RelatorioRotina() {
 
@@ -63,6 +68,27 @@ public class RelatorioRotina {
         this.relatorioTrocou = relatorioTrocou;
     }
 
+    public List<Rotina> getListDormiu() {
+        if (this.listDormiu == null) {
+            this.listDormiu = new ArrayList<>();
+        }
+        return listDormiu;
+    }
+
+    public void setListDormiu(List<Rotina> listDormiu) {
+        this.listDormiu = listDormiu;
+    }
+
+    public List<Rotina> getListAcordou() {
+        if (this.listAcordou == null) {
+            this.listAcordou = new ArrayList<>();
+        }
+        return listAcordou;
+    }
+
+    public void setListAcordou(List<Rotina> listAcordou) {
+        this.listAcordou = listAcordou;
+    }
 
     @Override
     public String toString() {
