@@ -119,10 +119,17 @@ public class FragmentoRegistroEventoBebe extends Fragment {
                 }
 
                 if (ultimaRotina != null) {
-                    if (ultimaRotina.getEvento().equalsIgnoreCase("Dormiu")) {
-                        daoEventoBebe.inserirRotina(new Rotina("Acordou", dataAtual, horaAtual, R.drawable.bebeacordando));
+                    if(ultimaRotina.getEvento().equalsIgnoreCase("Dormiu") && evento.equalsIgnoreCase("Dormiu")){
+                        Toast.makeText(getContext(), "Não foi possível cadastrar o evento, pois o bebê já esta dormindo", Toast.LENGTH_SHORT).show();
                         finalizarRegistroEvento();
                         return;
+                    }
+
+                    if (ultimaRotina.getEvento().equalsIgnoreCase("Dormiu") && !evento.equalsIgnoreCase("Acordou")) {
+                        daoEventoBebe.inserirRotina(new Rotina("Acordou", dataAtual, horaAtual, R.drawable.bebeacordando));
+                      //  Toast.makeText(getContext(), "Evento cadastro com sucesso !", Toast.LENGTH_SHORT).show();
+                    //    finalizarRegistroEvento();
+                     //   return;
                     }
                 }
                 int idImagem = 0;
@@ -138,7 +145,7 @@ public class FragmentoRegistroEventoBebe extends Fragment {
                 }
 
                 daoEventoBebe.inserirRotina(new Rotina(evento, dataAtual, horaAtual, idImagem));
-
+                Toast.makeText(getContext(), "Evento cadastro com sucesso !", Toast.LENGTH_SHORT).show();
                 finalizarRegistroEvento();
 
             }
@@ -146,8 +153,6 @@ public class FragmentoRegistroEventoBebe extends Fragment {
     }
 
     private void finalizarRegistroEvento(){
-        Toast.makeText(getContext(), "Evento cadastro com sucesso !", Toast.LENGTH_SHORT).show();
-
         carregarRotinas();
         initializeFragment();
     }
