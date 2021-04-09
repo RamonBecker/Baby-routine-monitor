@@ -1,4 +1,4 @@
-# BlackJack
+# Baby routine monitor
 
 > The baby routine app was developed for the programming discipline for mobile devices.
  
