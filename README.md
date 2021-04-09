@@ -21,14 +21,14 @@ The baby routine app aims to record, list and report the baby's activities durin
 
 
 ```sh
-git clone https://github.com/RamonBecker/MonitorRotinaBebe.git
+git clone https://github.com/RamonBecker/Baby-routine-monitor.git
 ```
 
 ![](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 
 ```sh
-git clone https://github.com/RamonBecker/MonitorRotinaBebe.git
+git clone https://github.com/RamonBecker/Baby-routine-monitor.git
 or install github https://desktop.github.com/ 
 
 ```
